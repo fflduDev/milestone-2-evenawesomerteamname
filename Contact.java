@@ -1,4 +1,3 @@
-package template;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +31,15 @@ class Contact {
 
     }
 
-    @Override
-    public boolean equals() {
+    public List<PhonebookEntry> getPhonebookEntries() {
 
-        return this.name.equals(name);
+        return entries;
+
+    }
+
+    public boolean equals(Contact other) {
+
+        return this.name.equals(other.name);
 
     }
 

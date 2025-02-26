@@ -1,5 +1,3 @@
-package template;
-
 /**
  *   model a PhonebookEntry 
  *   
@@ -19,16 +17,17 @@ class PhonebookEntry{
 		this.type = numberType;
 	}
 	
-	public String getNumberType() {
+	public String getType() {
 		return type;
 	}
 	
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return number;
 	}
 	
-	public boolean updateNumber(int number) {
+	public boolean updateNumber(String number) {
 		this.number = number;
+		return true;
 	}
 
  

@@ -1,4 +1,3 @@
-package template;
 
 import java.util.*;
 
@@ -13,6 +12,9 @@ import java.util.*;
 
 public class PhonebookHandler implements iPhonebookHander{
 
-    
+    public PhonebookHandler(Map<Contact, List<PhonebookEntry>> phonebook) {}
+    public List<Contact> sortByName() {return null;}
+	public List<PhonebookEntry> binarySearch(List<Contact> sortedContacts, String name) {return null;}
+	public void display(List<Contact> sortedContacts) {}
  
 }
