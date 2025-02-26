@@ -11,10 +11,10 @@ package template;
 
 class PhonebookEntry{
 	
-	private int number;
+	private String number;
 	private String type;
 	
-	public PhonebookEntry(int number String numberType) {
+	public PhonebookEntry(String number, String numberType) {
 		this.number = number;
 		this.type = numberType;
 	}
