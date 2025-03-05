@@ -41,6 +41,8 @@ public class TestHarness {
 		// 1) a call to search finds the user and displays their entries 
 		//(2) a call to search does not find the user & displays some detail illustrating same
 		TEST_Search(phonebookHander, sortedContacts, "Juan");
+		
+		TEST_Search(phonebookHander, sortedContacts, "Carl");
 		 
 
 	}

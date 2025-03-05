@@ -29,8 +29,25 @@ public class PhonebookHandler implements iPhonebookHander{
         return contacts;
 
     }
+    
+	public List<PhonebookEntry> binarySearch(List<Contact> sortedContacts, String name) {
+		int middle = (int) Math.floor(sortedContacts.size() / 2);
+		int cycle = 4;
+		while (middle != 0 && middle != sortedContacts.size() - 1) {
+			if (sortedContacts.get(middle).name.equals(name)) {
+				return sortedContacts.get(middle).getPhonebookEntries();
+			}
+			else if (sortedContacts.get(middle).name.compareTo(name) > 0) {
+				middle = (int) Math.floor(sortedContacts.size() / cycle);
+				cycle += 2;
+			} else {
+				middle = middle + (int) Math.floor(sortedContacts.size() / cycle);
+				cycle += 2;
+			}
+		}
+		return null;
+	}
 
-	public List<PhonebookEntry> binarySearch(List<Contact> sortedContacts, String name) {return null;}
 	public void display(List<Contact> sortedContacts) {}
  
 }
