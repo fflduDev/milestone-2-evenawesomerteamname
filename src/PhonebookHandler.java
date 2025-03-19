@@ -48,6 +48,78 @@ public class PhonebookHandler implements iPhonebookHander{
 		return null;
 	}
 
+    public List<Contact> sort() {
+
+        Contact[] contacts = phonebook.keySet().toArray(new Contact[0]);
+
+        quickSort(contacts, 0, contacts.length - 1);
+
+        return Arrays.asList(contacts);
+
+    }
+
+    public void quickSort(Contact[] contacts, int left, int right) {
+
+        if (left < right) {
+
+            int pivot = partition(contacts, left, right);
+
+            quickSort(contacts, left, pivot - 1);
+            quickSort(contacts, pivot + 1, right);
+
+        }
+
+    }
+
+    public int partition(Contact[] contacts, int left, int right) {
+        
+        int pivot_index = left;
+        String pivot_value = contacts[left++].name;
+        
+
+        // MAKE SURE LEFT == RIGHT IS LESS THAN PIVOT OTHERWISE BREAK?? OR HANDLE THAT CASE
+
+        // Until left and right equal partition
+        while (left != right) {
+
+            // Move left towards right until value > pivot or index == right
+            while (contacts[left].name.compareTo(pivot_value) <= 0 && left != right) {
+                left++;
+            }
+
+            // Then move right towards left until value < pivot or index == left
+            while (contacts[right].name.compareTo(pivot_value) >= 0 && left != right) {
+                right--;
+            }
+
+            // If left != right, swap left and right, repeat
+            if (left != right) {
+                swap(contacts, left, right);
+            }
+
+            // When left == right, swap pivot with one so it's in right position
+            if (left == right) {
+                if (contacts[left].name.compareTo(pivot_value) <= 0) {
+                    swap(contacts, pivot_index, left);
+                } else {
+                    swap(contacts, pivot_index, left - 1);
+                }
+                break;
+            }
+
+        }
+
+        return left;
+
+    }
+
+    public void swap(Contact[] contacts, int i1, int i2) {
+        Contact temp = contacts[i1];
+        contacts[i1] = contacts[i2];
+        contacts[i2] = temp;
+    }
+
+
 	public void display(List<Contact> sortedContacts) {}
  
 }

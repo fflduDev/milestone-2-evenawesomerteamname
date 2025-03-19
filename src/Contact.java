@@ -1,7 +1,6 @@
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * model a Contact 
@@ -46,7 +45,7 @@ class Contact {
     @Override
     public int hashCode() {
 
-        return Objects.hash(this.name);
+        return this.name.hashCode();
 
     }
 

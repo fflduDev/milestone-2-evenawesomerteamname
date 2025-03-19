@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +53,35 @@ public class TestHarness {
 		//TODO: call your phonebookHander & have it sort the contacts.  Return those.
 		
 		List<Contact> sortedContacts = phonebookHander.sortByName();
+
+		sortedContacts.forEach(o1 -> System.out.println(o1.name));
+
+		Map<Contact, List<PhonebookEntry>> pbmap = new HashMap<>();
+
+		pbmap.put(new Contact("Z"), new ArrayList<PhonebookEntry>());
+		pbmap.put(new Contact("Y"), new ArrayList<PhonebookEntry>());
+		pbmap.put(new Contact("X"), new ArrayList<PhonebookEntry>());
+		pbmap.put(new Contact("W"), new ArrayList<PhonebookEntry>());
+		pbmap.put(new Contact("V"), new ArrayList<PhonebookEntry>());
+		pbmap.put(new Contact("U"), new ArrayList<PhonebookEntry>());
+		pbmap.put(new Contact("T"), new ArrayList<PhonebookEntry>());
+		pbmap.put(new Contact("S"), new ArrayList<PhonebookEntry>());
+		pbmap.put(new Contact("R"), new ArrayList<PhonebookEntry>());
+		pbmap.put(new Contact("Q"), new ArrayList<PhonebookEntry>());
+		pbmap.put(new Contact("P"), new ArrayList<PhonebookEntry>());
+		pbmap.put(new Contact("O"), new ArrayList<PhonebookEntry>());
+		pbmap.put(new Contact("N"), new ArrayList<PhonebookEntry>());
+		pbmap.put(new Contact("M"), new ArrayList<PhonebookEntry>());
+		pbmap.put(new Contact("L"), new ArrayList<PhonebookEntry>());
+		pbmap.put(new Contact("K"), new ArrayList<PhonebookEntry>());
+		pbmap.put(new Contact("J"), new ArrayList<PhonebookEntry>());
+
+		PhonebookHandler pb = new PhonebookHandler(pbmap);
+
+		List<Contact> blah = pb.sort();
+
+		blah.forEach(o1 -> System.out.println(o1.name));
+
 		return sortedContacts;
 	}
 
