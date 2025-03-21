@@ -15,18 +15,14 @@ public class PhonebookHandler implements iPhonebookHander{
     Map<Contact, List<PhonebookEntry>> phonebook;
 
     public PhonebookHandler(Map<Contact, List<PhonebookEntry>> phonebook) {
+
         this.phonebook = phonebook;
+
     }
 
     public List<Contact> sortByName() {
-
-        List<Contact> contacts = new ArrayList<Contact>();
-
-        for (Contact c : phonebook.keySet()) contacts.add(c);
   
-        contacts.sort((o1, o2) -> o1.name.compareTo(o2.name));
-
-        return contacts;
+        return quickSort(phonebook.keySet().toArray(new Contact[0]));
 
     }
     
@@ -48,9 +44,7 @@ public class PhonebookHandler implements iPhonebookHander{
 		return null;
 	}
 
-    public List<Contact> sort() {
-
-        Contact[] contacts = phonebook.keySet().toArray(new Contact[0]);
+    public List<Contact> quickSort(Contact[] contacts) {
 
         quickSort(contacts, 0, contacts.length - 1);
 
@@ -65,61 +59,80 @@ public class PhonebookHandler implements iPhonebookHander{
             int pivot = partition(contacts, left, right);
 
             quickSort(contacts, left, pivot - 1);
-            quickSort(contacts, pivot + 1, right);
+            quickSort(contacts, pivot, right);
 
         }
 
     }
 
     public int partition(Contact[] contacts, int left, int right) {
-        
-        int pivot_index = left;
-        String pivot_value = contacts[left++].name;
-        
 
-        // MAKE SURE LEFT == RIGHT IS LESS THAN PIVOT OTHERWISE BREAK?? OR HANDLE THAT CASE
+        boolean leftSide = true;
+        int pivotIndex = left;
+        String pivotValue = contacts[left++].name;
 
-        // Until left and right equal partition
-        while (left != right) {
+        final int RANGE = right - left;
 
-            // Move left towards right until value > pivot or index == right
-            while (contacts[left].name.compareTo(pivot_value) <= 0 && left != right) {
-                left++;
-            }
+        for (int i = 0; i < RANGE; i++) {
 
-            // Then move right towards left until value < pivot or index == left
-            while (contacts[right].name.compareTo(pivot_value) >= 0 && left != right) {
-                right--;
-            }
+            if (leftSide) {
 
-            // If left != right, swap left and right, repeat
-            if (left != right) {
-                swap(contacts, left, right);
-            }
+                if (contacts[left].name.compareTo(pivotValue) <= 0) {
 
-            // When left == right, swap pivot with one so it's in right position
-            if (left == right) {
-                if (contacts[left].name.compareTo(pivot_value) <= 0) {
-                    swap(contacts, pivot_index, left);
+                    left++;
+
                 } else {
-                    swap(contacts, pivot_index, left - 1);
+
+                    leftSide = false;
+
                 }
-                break;
+
+            } else {
+
+                if (contacts[right].name.compareTo(pivotValue) > 0) {
+
+                    right--;
+
+                } else {
+
+                    swap(contacts, left, right);
+                    leftSide = true;
+                    left++; right--;
+
+                }
+
             }
 
         }
+
+        if (contacts[left].name.compareTo(contacts[right].name) > 0) swap(contacts, left, right);
+
+        if (contacts[left].name.compareTo(pivotValue) < 0) swap(contacts, left, pivotIndex);
 
         return left;
 
     }
 
     public void swap(Contact[] contacts, int i1, int i2) {
+
         Contact temp = contacts[i1];
         contacts[i1] = contacts[i2];
         contacts[i2] = temp;
+        
     }
 
 
-	public void display(List<Contact> sortedContacts) {}
+	public void display(List<Contact> sortedContacts) {
+
+        System.out.println("Phonebook:");
+
+        for (Contact c : sortedContacts) {
+
+            System.out.println(c.name);
+            for (PhonebookEntry p : c.getPhonebookEntries()) System.out.println("\t" + p.getType() + ": " + p.getPhoneNumber());
+
+        }
+
+    }
  
 }
